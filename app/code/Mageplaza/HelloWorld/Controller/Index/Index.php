@@ -1,7 +1,7 @@
 <?php
 namespace Mageplaza\HelloWorld\Controller\Index;
 
-class Test extends \Magento\Framework\App\Action\Action
+class Index extends \Magento\Framework\App\Action\Action
 {
     protected $_pageFactory;
 
@@ -16,9 +16,6 @@ class Test extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-        // return $this->_forward('hello');
-
-        echo "Hello World";
-        exit;
+        return $this->_pageFactory->create();
     }
 }
