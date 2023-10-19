@@ -24,6 +24,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'identify' => true,
                     'nullable' => false,
                     'primary' => true,
+                    'auto_increment' => true,
                     'unsigned' => true,
                 ],
                 'Post ID'
