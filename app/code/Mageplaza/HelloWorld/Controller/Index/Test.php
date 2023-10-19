@@ -18,7 +18,10 @@ class Test extends \Magento\Framework\App\Action\Action
     {
         // return $this->_forward('hello');
 
-        echo "Hello World";
+        // echo "Hello World";
+        $textDisplay = new \Magento\Framework\DataObject(['text' => 'Mageplaza']);
+        $this->_eventManager->dispatch('mageplaza_helloworld_display_text', ['mp_text' => $textDisplay]);
+        echo $textDisplay->getText();
         exit;
     }
 }
