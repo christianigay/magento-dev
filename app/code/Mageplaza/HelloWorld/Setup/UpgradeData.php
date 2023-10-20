@@ -6,27 +6,48 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 
+use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Setup\EavSetupFactory;
+use Magento\Framework\Setup\InstallDataInterface;
+use Magento\Eav\Model\Config;
+use Magento\Customer\Model\Customer;
+
 class UpgradeData implements UpgradeDataInterface
 {
-	protected $_postFactory;
+	private $eavSetupFactory;
+	public $eavConfig;
 
-	public function __construct(\Mageplaza\HelloWorld\Model\PostFactory $postFactory)
+	public function __construct(EavSetupFactory $eavSetupFactory, Config $eavConfig)
 	{
-		$this->_postFactory = $postFactory;
+		$this->eavSetupFactory = $eavSetupFactory;
+		$this->eavConfig = $eavConfig;
 	}
 
 	public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
 	{
-		if (version_compare($context->getVersion(), '1.4.0', '<')) {
-			$data = [
-				'name'         => "Magento 2 Events",
-				'post_content' => "This article will talk about Events List in Magento 2. As you know, Magento 2 is using the events driven architecture which will help too much to extend the Magento functionality. We can understand this event as a kind of flag that rises when a specific situation happens. We will use an example module Mageplaza_HelloWorld to exercise this lesson.",
-				'url_key'      => '/magento-2-module-development/magento-2-events.html',
-				'tags'         => 'magento 2,mageplaza helloworld',
-				'status'       => 1
-			];
-			$post = $this->_postFactory->create();
-			$post->addData($data)->save();
-		}
+		$eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+		$eavSetup->addAttribute(
+			\Magento\Customer\Model\Customer::ENTITY,
+			'sample_attribute',
+			[
+				'type' 				=> 'varchar',
+				'label' 			=> 'Sample Attribute',
+				'input' 			=> 'text',
+				'required' 			=> false,
+				'visible'			=> true,
+				'user_defined'		=> true,
+				'position'			=> 999,
+				'system'			=> 0
+			]
+		);
+
+		$sampleAttribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'sample_attribute');
+
+		$sampleAttribute->setData(
+			'used_in_forms',
+			['adminhtml_customer']
+		);
+
+		$sampleAttribute->save();
 	}
 }
