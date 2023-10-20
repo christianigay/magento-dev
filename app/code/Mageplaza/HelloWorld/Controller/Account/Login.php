@@ -1,7 +1,7 @@
 <?php
-namespace Mageplaza\HelloWorld\Controller\Index;
+namespace Mageplaza\HelloWorld\Controller\Action;
 
-class Test extends \Magento\Framework\App\Action\Action
+class Login extends \Magento\Framework\App\Action\Action
 {
     protected $_pageFactory;
 

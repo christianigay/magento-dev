@@ -1,8 +1,19 @@
 <?xml version="1.0" ?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+<!-- <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route frontName="helloworld" id="helloworld">
             <module name="Mageplaza_HelloWorld"/>
         </route>
     </router>
+</config> -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+   <router id="standard">
+        <route frontName="helloworld" id="helloworld">
+            <module name="Mageplaza_HelloWorld"/>
+        </route>
+       <route id="customer">
+           <module name="Mageplaza_HelloWorld" before="Magento_Customer" />
+       </route>
+   </router>
 </config>
