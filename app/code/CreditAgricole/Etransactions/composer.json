@@ -1,0 +1,19 @@
+{
+  "name": "creditagricole/etransactions",
+  "description": "Etransactions payment module for Magento 2.3/2.4",
+  "type": "magento2-module",
+  "version": "2.0.6",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "require": {
+    "php": "~7.4.0||~8.1.0"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "CreditAgricole\\Etransactions\\": ""
+    }
+  }
+}
